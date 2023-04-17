@@ -18,13 +18,26 @@ function onInputHandler(event) {
   console.log(event.target.value);
 
   country = event.target.value;
+  const countriesList = [];
+  let countriesToRender = '';
+
 
   fetchCountries(country)
     .then(data => {
       data.map(country => {
-        console.log('country.name.official', country, country.name.official);
-        refs.list.insertAdjacentHTML("beforeend", `<li>${country.name.official}</li>`);
+        countriesList.push(country);
+        // console.log('country.name.official', country, country.name.official);
+        console.log('countriesList', countriesList);
+        // renderCountries (country);
+        countriesToRender+=`<li>${country.name.official}</li>`;
+        return countriesToRender;
       });
-    })
+    }).then(data => refs.list.insertAdjacentHTML("beforeend" , data))
     .catch(error => console.log(error));
+}
+
+
+function renderCountries (country){
+
+
 }
