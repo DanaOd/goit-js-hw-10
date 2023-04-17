@@ -18,3 +18,35 @@ body {
   max-width: 320px;
   margin-bottom: 16px;
 }
+
+.country-list {
+  display: block;
+}
+
+.country-list li {
+  display: flex;
+  align-items: left;
+  gap: 10px;
+
+  margin-bottom: 20px;
+
+  list-style: none;
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.country-info{
+  /* visibility: hidden; */
+  margin-top: 40px;
+  display: block;
+  min-height: 300px;
+  line-height: 200%;
+
+  background-color: rgb(204, 234, 234);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.hidden{
+  visibility: hidden;
+}
