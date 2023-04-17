@@ -1,18 +1,30 @@
 import './css/styles.css';
+import debounce from 'lodash.debounce';
+import fetchCountries from './fetchCountries.js';
 
 const DEBOUNCE_DELAY = 300;
-console.log('hi');
 
-let name = "France";
+const refs = {
+  query: document.querySelector('#search-box'),
+  list: document.querySelector('.country-list'),
+  info: document.querySelector('.country-info'),
+};
 
-fetch(`https://restcountries.com/v3.1/name/deutschland`)
-  .then(response => {
-    if (!response.ok) {
-      throw new Error(response.status);
-    }
-    return response.json();
-  })
-  .then(data => {
-    console.log(data);
-  })
-  .catch(error => console.log(error));
+refs.query.addEventListener('input', debounce(onInputHandler, DEBOUNCE_DELAY));
+
+let country = '';
+
+function onInputHandler(event) {
+  console.log(event.target.value);
+
+  country = event.target.value;
+
+  fetchCountries(country)
+    .then(data => {
+      data.map(country => {
+        console.log('country.name.official', country, country.name.official);
+        refs.list.insertAdjacentHTML("beforeend", `<li>${country.name.official}</li>`);
+      });
+    })
+    .catch(error => console.log(error));
+}
